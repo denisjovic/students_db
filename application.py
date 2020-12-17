@@ -45,10 +45,8 @@ def delete(id):
     try:
         db.session.delete(student)
         db.session.commit()
-        # flash("Deleted!")
         return redirect("/show")
     except:
-        # flash('Something went wrong, deleting failed.')
         print("Something went wrong")
         return redirect("/show")
 
