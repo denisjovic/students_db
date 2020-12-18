@@ -2,83 +2,77 @@
 
 {% block content %}
 
-    {% if students %}
-    <table class="highlight">
-        <thead>
-            <tr>
-                <th>
-                    <p>
-                    <form action="/checkbox" method="POST" id="checkboxform">
-                        <label for="select_all">
-                            <input id="select_all" type="checkbox" />
-                            <span>Select all</span>
-                        </label>
-                        </p>
-                </th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th></th>
-            </tr>
-        </thead>
+{% if students %}
+<table class="table is-striped">
+    <thead>
+        <tr>
+            <th>
+                <p>
+                <form action="/checkbox" method="POST" id="checkboxform">
+                    <label for="select_all">
+                        <input id="select_all" type="checkbox" />
+                        <span>Select all</span>
+                    </label>
+                    </p>
+            </th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th></th>
+        </tr>
+    </thead>
 
-        <tbody>
-            {% for student in students %}
-
-            <tr>
-                <td><label><input type="checkbox" value="{{ student.id }}" name="checkbox" /><span></span></label></td>
-                <td>{{ student.name }}</td>
-                <td>{{ student.email }}</td>
-                <td>{{ student.phone }}</td>
-                <td><a href="/delete/{{student.id}}"><span class="material-icons">
-                            delete
-                        </span></a>
-                </td>
-
-
-
-                {% endfor %}
-            </tr>
-        </tbody>
-    </table>
-    <button type="submit" class="button is-danger">
-        <span class="material-icons">delete</span>
-        Delete selected
-    </button>
-    </form>
-    <button class="button is-primary" style="float: right;"><a href="/">Add new student <span class="material-icons">
-                add_circle_outline
-            </span></a></button>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td><label><input type="checkbox" value="{{ student.id }}" name="checkbox" /><span></span></label></td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.phone }}</td>
+            <td><a href="/delete/{{student.id}}"><span class="material-icons">
+                        delete
+                    </span></a>
+            </td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
+<button type="submit" class="button is-danger">
+    <span class="material-icons">delete</span>
+    Delete selected
+</button>
+</form>
+<button class="button is-primary" style="float: right;"><a href="/">Add new student <span class="material-icons">
+            add_circle_outline
+        </span></a></button>
 
 
-    {% else %}
-    <section class="hero is-medium is-primary is-bold">
-        <div class="hero-body">
-            <div class="container">
-                <h2 class="title">
-                    <h2>Student database is empty, do you want to <a href="/">add</a> some?</h2>
-                </h2>
-            </div>
-        </div>
-    </section>
-
-    {% endif %}
+{% else %}
+<!-- If students db is empty -->
+<div class="container is-fluid">
+    <div class="notification is-primary">
+        <h2>Student database is empty, do you want to <a href="/">add</a> some?</h2>
+    </div>
+</div>
 
 
-    <!-- Select all checkbox for deleting -->
-    <script>
-        $('#select_all').click(function (event) {
-            if (this.checked) {
-                $(':checkbox').each(function () {
-                    this.checked = true;
-                });
-            } else {
-                $(':checkbox').each(function () {
-                    this.checked = false;
-                });
-            }
-        });
+{% endif %}
 
-    </script>
+
+<!-- Select all checkboxes for deleting -->
+<script>
+    $('#select_all').click(function (event) {
+        if (this.checked) {
+            $(':checkbox').each(function () {
+                this.checked = true;
+            });
+        } else {
+            $(':checkbox').each(function () {
+                this.checked = false;
+            });
+        }
+    });
+
+</script>
 
 {% endblock %}

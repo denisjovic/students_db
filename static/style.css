@@ -7,3 +7,8 @@ nav {
 .container {
     display: flex;
 }
+
+.notification {
+    width: 100%;
+}
+
