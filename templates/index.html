@@ -5,11 +5,16 @@
   <div class="container">
   <form action="/show" method="POST">
     Add full name:
-    <input type="text" name="fullname" />
+    <input type="text" name="fullname" required/>
     Add email:
-    <input type="text" name="email">
+    <input type="email" name="email" required>
     Add phone:
-    <input type="text" name="phone">
+    <input type="tel" 
+            name="phone" 
+            required 
+            pattern="[0-9]{3}-[0-9]{3}"
+            placeholder="format: 333-555"
+    >
     <button class="btn waves-effect waves-light" type="submit" name="action">
       Submit<i class="material-icons right">send</i>
     </button>
