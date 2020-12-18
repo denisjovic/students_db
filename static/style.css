@@ -1,11 +1,27 @@
+body {
+    font-family: 'JetBrains Mono', monospace;
+}
 
 nav {
     padding: 0px 0px 30px 0px;
+    margin-bottom: 10vh;
+}
+
+form, input {
+    text-align: center;
+}
+
+button > .waves-light {
+    margin-top: 5vh !important;
 }
 
 
 .container {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10vh;
 }
 
 .notification {
