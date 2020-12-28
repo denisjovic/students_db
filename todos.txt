@@ -1,0 +1,34 @@
+- sredi strukturu projekta 
+- formu prebaci na backend
+- dodaj logovanje
+    - ako nije ulogovan, samo login page
+    - nakon logovanja, user moze biti admin i student
+- Testiranje    
+    - unit testovi za fe/be 
+- Pagination
+- Filter/sortiranje 
+- Error handling
+
+
+
+
+
+
+
+OK, super, imas sve sto smo rekli i mislim da si relativno brzo uradio. Sad cu ti napisati sta i kako da unapredis i kad to zavrsis to ce biti to za ovaj projekat. Naravno, ako ti imas vremena i zelis da eksperimentises, ti mozes i vise da uradis, ali ja cu ti reci sta da uradis da tvoj mali projekat licni na tipican veci projekat i da radi na slican nacin.
+
+Da unapradis projekat sa trenutnim funkcionalnostima, uradi sledece:
+- application.py trenutno sadrzi sve, dok veci projekti obicno imaju malo drugaciju strukturu, pa i ti preuredi da svaka logicka celina bude u posebnom folderu ili fajlu (posebno db stvari, posebno routes, posebno model/schema). Imas ovde objasnjenje sta mislim, ali slobodno mozes da izguglas i druge opcije, nije ovo jedina, samo je primer: https://realpython.com/python-application-layouts/#flask
+- Trenutno koristis formu na frontendu. To je zastareo pristup. Ono sto se danas generalno koristi jeste da imas sve potrebne API endpoints na bekendu, a na frontendu imas js script koji se izvrsava kad kliknes na nesto ili napravis neku drugu akciju, a u tom skriptu pozivas ove beckend API endpoints (a oni na bekendu kontaktiraju bazu i rade drugu biznis logiku). Tipa kad dodajes studenta imaces endpoint api/student/add, kad brises imaces api/student/delete i njih ces pozivati u JavaScriptu na frontendu. Ovo ti je primer kako da uradis API: https://realpython.com/flask-connexion-rest-api/ Dobro ga prouci, pa onda napravi promene u svom projektu. Ti si vec na dobrom putu, ali imaces neke stvari koje treba da dodas kad izbacis formu sa frontenda.
+
+Nova funkcionalnost koju je bitno da dodas je:
+- logovanje - Ako korisnik nije ulogovan, ne moze da vidi nista osim strane za logovanje. Kad se uloguje, treba da imas dva nivoa privilegija, student i admin. Student moze da se uloguje i da vidi spisak svih studenata i moze da edituje svoje licne informacije (znaci moraces malo da izmenis postojeci frontend, student moze da vidi spisak svih studenata ali ne moze da brise niti da vidi dugme za brisanje, ali moze ima dugme tipa Edit Profile i kad klikne na njega ide na novu stranu gde moze da edituje svoje licne info i da na kraju sacuva ili cancel-uje). Admin moze da vidi spisak svih studenata, moze da edituje svacije informacije (mozes pored svakog studenta u tabeli da dodas dugme Edit i kad admin klikne na to dugme, ide na stranu gde edituje studentove info) i moze da brise studente (brisanje moze da funkcionise kao i ranije, preko checkbox-ova samo da bude vidljivo samo adminu).
+
+Opciono - ovo su stvari koje nisu neophodne, ali ce biti plus ako ih imas, ne moras da uradis sve, vidi da li ti je nesto posebno interesantno, pa uradi to, ali tek nakon sto zavrsis ovo sto sam ti gore napisala, to ti je bitnije:
+- Testiranje - svaki veci i ozbiljan projekat ima testove, pre svega unit testove. Oni mogu da testiraju i frontend i backend, ali ce ti moguce trebati razlicite biblioteke da testiras frontend i backend.
+- Pagination - strana gde izlistavas studente moze da bude mnogo dugacka ako imas tipa 1000 studenata, zato se koristi pagination, pa na prvoj strani prikazes prvih 20 studenata, na drugoj sledecih 20 i tako redom.
+- Mogucnost sortiranja i filtriranja studenata u tabeli po nekim parametrima
+
+Obrati paznju da hendlujes greske lepo, da ako negde nesto pukne, da korisnik dobije neku poruku o tome da je doslo do greske i ako je moguce informaciju u cemu je problem. Znam da ti frontend nije prioritet, ali savetujem da na kraju odradis neko osnovno sredjivanje cisto da lepo izgleda na screenshotu ili videu, nista spec, samo da da ne izgleda neuredno i zastarelo, bukvalno neki osnovni css ce biti dovoljan.
+
+Eto, to ti je to, puno sam ti napisala, ali nema toliko da se radi. Kad unapredis ovo sto sam ti napisala za trenutnu verziju, onda imas samo da dodas logovanje. To ce ti moguce oduzeti najvise vremena, ali to je mnogo vazno, bukvalno svak web aplikacija danas ima logovanje. Tako, aj srecno, pa se javi kad zavrsis. Nakon ovoga cemo nesto novo i drugacije. ;)
