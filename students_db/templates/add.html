@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <div class="container text-center">
+  <form action="/add" method="POST" class="form-register">
+
+    {{ form.hidden_tag() }}
+ 
+    {{ form.name.label() }}
+    {{ form.name(class="form-control text-white") }}
+
+    {{ form.email.label() }}
+    {{ form.email(class="form-control text-white") }}
+
+    {{ form.phone.label() }}
+    {{ form.phone(class="form-control text-white") }}
+
+    {{ form.submit_data(class="mt-4 form-control btn btn-large btn-success") }}
+  </form>
+</div>
+
+{% endblock %}

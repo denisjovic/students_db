@@ -3,29 +3,29 @@
 {% block content %}
 
 {% if students %}
-<table class="table is-striped">
-    <thead>
+<table class="table table-dark">
+    <thead class="thead-dark text-white">
         <tr>
-            <th>
-                <p>
+            <th scope="col">
                 <form action="/checkbox" method="POST" id="checkboxform">
                     <label for="select_all">
                         <input id="select_all" type="checkbox" />
-                        <span>Select all</span>
+                        <span></span>
                     </label>
-                    </p>
+                    Select all
+                    
             </th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th></th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
 
     <tbody>
         {% for student in students %}
         <tr>
-            <td><label><input type="checkbox" value="{{ student.id }}" name="checkbox" /><span></span></label></td>
+            <td><label><input type="checkbox" value="{{student.id}}" name="checkbox" /><span></span></label></td>
             <td>{{ student.name }}</td>
             <td>{{ student.email }}</td>
             <td>{{ student.phone }}</td>
@@ -42,7 +42,7 @@
     Delete selected
 </button>
 </form>
-<button class="button is-primary" style="float: right;"><a href="/">Add new student <span class="material-icons">
+<button class="button is-primary" style="float: right;"><a class="text-white" href="/add">Add new student <span class="material-icons text-white">
             add_circle_outline
         </span></a></button>
 
@@ -51,7 +51,7 @@
 <!-- If students db is empty -->
 <div class="container is-fluid">
     <div class="notification is-primary">
-        <h2>Student database is empty, do you want to <a href="/">add</a> some?</h2>
+        <h2>Student database is empty, do you want to <a href="/add">add</a> some?</h2>
     </div>
 </div>
 

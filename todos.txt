@@ -1,4 +1,4 @@
-- sredi strukturu projekta 
+- sredi strukturu projekta ✓
 - formu prebaci na backend
 - dodaj logovanje
     - ako nije ulogovan, samo login page
@@ -8,9 +8,6 @@
 - Pagination
 - Filter/sortiranje 
 - Error handling
-
-
-
 
 
 

@@ -1,24 +1,21 @@
-{% extends "layout.html" %}
+<!-- {% extends "layout.html" %}
 
 {% block content %}
 
   <div class="container">
-  <form action="/show" method="POST">
-    Add full name:
-    <input type="text" name="fullname" required placeholder="John Doe"/>
-    Add email:
-    <input type="email" name="email" required placeholder="name@email.com">
-    Add phone:
-    <input type="tel" 
-            name="phone" 
-            required 
-            pattern="[0-9]{3}-[0-9]{3}"
-            placeholder="format: 333-555"
-    >
-    <button class="btn waves-effect waves-light" type="submit" name="action">
-      Submit<i class="material-icons right">send</i>
-    </button>
+  <form action="/show" method="POST" class="form-control">
+    {{ form.username.label() }}
+    {{ form.username(class="form-control") }}
+
+    {{ form.email.label() }}
+    {{ form.email(class="form-control") }}
+
+    {{ form.phone.label() }}
+    {{ form.phone(class="form-control") }}
+
+    {{ form.submit_data.label() }}
+    {{ form.submit_data(class="form-control btn btn-large btn-success") }}
   </form>
 </div>
 
-{% endblock %}
+{% endblock %} -->

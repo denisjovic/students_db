@@ -7,9 +7,6 @@ nav {
     margin-bottom: 10vh;
 }
 
-form, input {
-    text-align: center;
-}
 
 button > .waves-light {
     margin-top: 5vh !important;
