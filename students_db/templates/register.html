@@ -2,6 +2,13 @@
 {% block content %}
 
 <div class="container text-center">
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}
+    </div>
+{% endif %}
+{% endwith %}
 <form 
     action="/register" 
     method="POST" 
@@ -14,6 +21,10 @@
     {{ form.email(class="form-control text-center text-white", placeholder="Email") }}
     {{ form.password(class="form-control text-center text-white", placeholder="Password") }}
     {{ form.submit_data(class="form-control btn btn-large btn-success") }}
+
+    {% if form.errors %}
+    {{ form.errors }}
+    {% endif %}
 </form>
 </div>
 
