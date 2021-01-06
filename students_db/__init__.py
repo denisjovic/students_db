@@ -1,4 +1,3 @@
-from students_db import routes
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -18,5 +17,11 @@ app.secret_key = 'some random secret key'
 
 login = LoginManager(app)
 login.login_view = "login"
+login.login_message_category = "info"
+
 
 db = SQLAlchemy(app)
+
+# this must go on the bottom
+from students_db import routes
+
