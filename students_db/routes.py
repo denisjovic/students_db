@@ -6,6 +6,7 @@ from students_db.forms import RegisterForm, AddStudent, LoginForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import current_user, login_required, login_user
 
+
 @app.route('/')
 @app.route('/show')
 @login_required
@@ -42,10 +43,10 @@ def delete(id):
     try:
         db.session.delete(student)
         db.session.commit()
-        flash('Student deleted!')
+        flash('Student deleted!', category='info')
         return redirect(url_for('dashboard'))
     except Exception as e:
-        print("Something went wrong", e)
+        flash("Something went wrong")
         return redirect(url_for('dashboard'))
 
 
@@ -54,9 +55,9 @@ def delete(id):
 def handle_checkbox():
     if request.method == "POST":
         students = request.form.getlist('checkbox')
-        for s in students:
-            s = Student.query.get(s)
-            db.session.delete(s)
+        for student in students:
+            student = Student.query.get(s)
+            db.session.delete(student)
             db.session.commit()
         return redirect(url_for('dashboard'))
     return redirect(url_for('dashboard'))
@@ -65,16 +66,20 @@ def handle_checkbox():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
-    message = Markup('User already exists! Would you like to <a href="/login">log in </a> instead?')
+    message = Markup(
+        'User already exists! Would you like to <a href="/login">log in </a> instead?')
     if request.method == 'POST' and form.validate():
         if User.query.filter_by(email=form.email.data).first() or User.query.filter_by(username=form.username.data).first():
             flash(message, category='info')
             return redirect(url_for('register'))
-        hashed_password = generate_password_hash(form.password.data, method='sha256')
-        new_user = User(username=form.username.data, email=form.email.data, password_hash=hashed_password)
+        hashed_password = generate_password_hash(
+            form.password.data, method='sha256')
+        new_user = User(username=form.username.data,
+                        email=form.email.data, password_hash=hashed_password)
         db.session.add(new_user)
         db.session.commit()
         flash('User created!', category='info')
+        login_user(new_user)
         return redirect(url_for('dashboard'))
     if form.errors != {}:
         for err_msg in form.errors.values():
@@ -85,7 +90,8 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    message = Markup('Account does not exist, do you want to <a href="/register">create</a> one instead?')
+    message = Markup(
+        'Account does not exist, do you want to <a href="/register">create</a> one instead?')
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if not user:
@@ -101,7 +107,7 @@ def login():
 
         flash('Username or password incorrect', category='danger')
         return redirect(url_for('login'))
-    
+
     if form.errors != {}:
         for err in form.errors.values():
             flash(err, category='danger')

@@ -2,21 +2,21 @@
 
 {% block content %}
 
-  <form action="/add" method="POST" class="form-register">
+<form action="/add" method="POST" class="form-register">
 
-    {{ form.hidden_tag() }}
- 
-    {{ form.name.label() }}
-    {{ form.name(class="form-control text-white") }}
+  {{ form.hidden_tag() }}
 
-    {{ form.email.label() }}
-    {{ form.email(class="form-control text-white") }}
+  {{ form.name.label() }}
+  {{ form.name(class="form-control text-white") }}
 
-    {{ form.phone.label() }}
-    {{ form.phone(class="form-control text-white") }}
+  {{ form.email.label() }}
+  {{ form.email(class="form-control text-white") }}
 
-    {{ form.submit_data(class="mt-4 form-control btn btn-large btn-success") }}
-  </form>
+  {{ form.phone.label() }}
+  {{ form.phone(class="form-control text-white") }}
+
+  {{ form.submit_data(class="mt-4 form-control btn btn-large btn-success") }}
+</form>
 </div>
 
 {% endblock %}
