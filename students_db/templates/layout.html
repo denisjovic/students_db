@@ -1,5 +1,4 @@
 <html>
-
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -33,12 +32,10 @@
         {% else %}
         <li><a href="/login">Log in</a></li>
         <li><a href="/register">Sign up</a></li>
-
       </ul>
       {% endif %}
     </div>
   </nav>
-
   {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
   {% for category, message in messages %}
@@ -51,11 +48,10 @@
   {% endfor %}
   {% endif %}
   {% endwith %}
-  <div class='container mt-4'>
+
   {% block content %}
 
   {% endblock %}
-  </div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -70,5 +66,4 @@
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>
 </body>
-
 </html>

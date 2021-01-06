@@ -43,9 +43,10 @@ def delete(id):
     try:
         db.session.delete(student)
         db.session.commit()
-        flash('Student deleted!', category='info')
+        flash(f'Student {student.name} has been deleted!', category='info')
         return redirect(url_for('dashboard'))
     except Exception as e:
+        print(e)
         flash("Something went wrong")
         return redirect(url_for('dashboard'))
 
@@ -56,9 +57,10 @@ def handle_checkbox():
     if request.method == "POST":
         students = request.form.getlist('checkbox')
         for student in students:
-            student = Student.query.get(s)
-            db.session.delete(student)
+            del_student = Student.query.get(student)
+            db.session.delete(del_student)
             db.session.commit()
+            flash(f"Student {del_student.name} has been deleted!", category="info")
         return redirect(url_for('dashboard'))
     return redirect(url_for('dashboard'))
 
