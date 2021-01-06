@@ -22,7 +22,7 @@
 </head>
 
 <body class='bg-dark'>
-  <nav class='mb-5'>
+  <nav>
     <div class="nav-wrapper">
       <a href="/" class="brand-logo center" style="padding-left: 20px; margin-bottom: 20px;">the_database</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -51,9 +51,11 @@
   {% endfor %}
   {% endif %}
   {% endwith %}
+  <div class='container mt-4'>
   {% block content %}
 
   {% endblock %}
+  </div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
