@@ -25,18 +25,41 @@
     <div class="nav-wrapper">
       <a href="/" class="brand-logo center" style="padding-left: 20px; margin-bottom: 20px;">the_database</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        {% if current_user.is_authenticated %}
         <li><a href="/">Home</a></li>
         <li><a href="/add">Add new student</a></li>
         <li><a href="/logout">Log out</a></li>
+        {% else %}
         <li><a href="/login">Log in</a></li>
         <li><a href="/register">Sign up</a></li>
 
       </ul>
+      {% endif %}
     </div>
   </nav>
-  {% block content %}
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+      {% for category, message in messages %}
+          <div class='alert alert-{{ category }} text-center'>
+              <button type='button' class='m1-2 mb-1 close' data-dismiss='alert' aria-label='Close'>
+                  <span aria-hidden='true'>&times;</span>
+              </button>
+              {{message}}
+          </div>
+      {% endfor %}
+  {% endif %}
+{% endwith %}
+{% block content %}
   
-  {% endblock %}
+{% endblock %}
+
+        <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 </html>
 

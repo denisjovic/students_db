@@ -2,14 +2,6 @@
 
 {% block content %}
 
-  <div class="container text-center">
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <div class="notification is-danger">
-        {{ messages[0] }}
-    </div>
-    {% endif %}
-    {% endwith %}
   <form action="/add" method="POST" class="form-register">
 
     {{ form.hidden_tag() }}

@@ -3,13 +3,6 @@
 {% block content %}
 
     {% if students %}
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="notification is-danger">
-                    {{ messages[0] }}
-                </div>
-            {% endif %}
-        {% endwith %}
         <table class="table table-dark">
             <thead class="thead-dark text-white">
             <tr>
