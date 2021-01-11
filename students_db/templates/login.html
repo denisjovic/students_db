@@ -5,7 +5,7 @@
     <form action="/login" method="POST" class="form-register" style="color:white">
         {{ form.hidden_tag() }}
         <h1 class="h3 mb-3 font-weight-normal">Login</h1>
-        {{ form.username(class="form-control text-center text-white", placeholder="Username") }}
+        {{ form.email(class="form-control text-center text-white", placeholder="Email") }}
         {{ form.password(class="form-control text-center text-white", placeholder="Password") }}
         {{ form.submit_data(class="form-control btn btn-large btn-success mt-4") }}
     </form>

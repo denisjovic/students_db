@@ -11,7 +11,7 @@ from flask_login import current_user, login_required, login_user
 @app.route('/show')
 @login_required
 def dashboard():
-    students = Student.query.all()
+    students = User.query.all()
     return render_template('table.html', students=students)
 
 
@@ -20,10 +20,13 @@ def dashboard():
 def add():
     form = AddStudent()
     if form.validate_on_submit():
-        student = Student(
+        hashed_password = generate_password_hash(form.password.data, method='sha256')
+        student = User(
             name=form.name.data,
             email=form.email.data,
-            phone=form.phone.data
+            phone=form.phone.data,
+            department=form.department.data,
+            password_hash=hashed_password
         )
         db.session.add(student)
         db.session.commit()
@@ -39,7 +42,7 @@ def add():
 @app.route("/delete/<int:id>", methods=["POST", "GET"])
 @login_required
 def delete(id):
-    student = Student.query.get(id)
+    student = User.query.get(id)
     try:
         db.session.delete(student)
         db.session.commit()
@@ -57,7 +60,7 @@ def handle_checkbox():
     if request.method == "POST":
         students = request.form.getlist('checkbox')
         for student in students:
-            del_student = Student.query.get(student)
+            del_student = User.query.get(student)
             db.session.delete(del_student)
             db.session.commit()
             flash(f"Student {del_student.name} has been deleted!", category="info")
@@ -71,13 +74,16 @@ def register():
     message = Markup(
         'User already exists! Would you like to <a href="/login">log in </a> instead?')
     if request.method == 'POST' and form.validate():
-        if User.query.filter_by(email=form.email.data).first() or User.query.filter_by(username=form.username.data).first():
+        if User.query.filter_by(email=form.email.data).first():
             flash(message, category='info')
             return redirect(url_for('register'))
         hashed_password = generate_password_hash(
             form.password.data, method='sha256')
-        new_user = User(username=form.username.data,
-                        email=form.email.data, password_hash=hashed_password)
+        new_user = User(name=form.name.data,
+                        email=form.email.data,
+                        phone=form.phone.data,
+                        department=form.department.data,
+                        password_hash=hashed_password)
         db.session.add(new_user)
         db.session.commit()
         flash('User created!', category='info')
@@ -95,7 +101,7 @@ def login():
     message = Markup(
         'Account does not exist, do you want to <a href="/register">create</a> one instead?')
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = User.query.filter_by(email=form.email.data).first()
         if not user:
             flash(message, category='info')
             return redirect(url_for('login'))
@@ -122,3 +128,16 @@ def logout():
     session.clear()
     flash('You\'re logged out!', category='info')
     return redirect(url_for('login'))
+
+
+@app.route('/profile/<int:id>', methods=["GET", "POST"])
+def profile(id):
+    user_to_update = User.query.get(id)
+    form = AddStudent(obj=user_to_update)
+    if request.method == 'POST':
+        form.populate_obj(user_to_update)
+        db.session.commit()
+        flash('User data updated!', category='success')
+        return redirect(url_for('dashboard'))
+    return render_template('profile.html', profile=user_to_update, form=form)
+

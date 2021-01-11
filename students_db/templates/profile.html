@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container text-center">
-<form action="/add" method="POST" class="form-register">
+<form action="/profile/{{ profile.id }}" method="POST" class="form-register">
 
   {{ form.hidden_tag() }}
 
@@ -19,8 +19,8 @@
   {{ form.department.label() }}
   {{ form.department(class="form-control text-white") }}
 
-  {{ form.password.label() }}
-  {{ form.password(class="form-control text-white") }}
+{#  {{ form.password.label() }}#}
+{#  {{ form.password(class="form-control text-white") }}#}
 
   {{ form.submit_data(class="mt-4 form-control btn btn-large btn-success") }}
 </form>

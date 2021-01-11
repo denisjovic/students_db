@@ -28,6 +28,7 @@
         {% if current_user.is_authenticated %}
         <li><a href="/">Home</a></li>
         <li><a href="/add">Add new student</a></li>
+            <li><a href="/profile/{{ current_user.id }}">My profile</a></li>
         <li><a href="/logout">Log out</a></li>
         {% else %}
         <li><a href="/login">Log in</a></li>
