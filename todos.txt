@@ -2,11 +2,12 @@
 - formu prebaci na backend ✓
 - dodaj logovanje ✓
     - ako nije ulogovan, samo login page ✓
-    - nakon logovanja, user moze biti admin i student
+    - nakon logovanja, user moze biti admin i student ✓
 - Testiranje    
     - unit testovi za fe/be 
 - Pagination
-- Filter/sortiranje 
+- Filter ✓
+- Sortiranje
 - Error handling
 
 

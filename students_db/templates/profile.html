@@ -8,22 +8,22 @@
   {{ form.hidden_tag() }}
 
   {{ form.name.label() }}
-  {{ form.name(class="form-control text-white") }}
+  {{ form.name(class="form-control text-white text-center") }}
 
   {{ form.email.label() }}
-  {{ form.email(class="form-control text-white") }}
+  {{ form.email(class="form-control text-white text-center") }}
 
   {{ form.phone.label() }}
-  {{ form.phone(class="form-control text-white") }}
+  {{ form.phone(class="form-control text-white text-center") }}
 
   {{ form.department.label() }}
-  {{ form.department(class="form-control text-white") }}
+  {{ form.department(class="form-control text-white text-center") }}
 
-{#  {{ form.password.label() }}#}
-{#  {{ form.password(class="form-control text-white") }}#}
+  {{ form.submit_data(class="mt-4 form-control btn btn-large btn-success", value="Save") }}
+    <button class="btn btn-secondary mt-4"><a href="{{ url_for('dashboard') }}">Go back</a></button>
 
-  {{ form.submit_data(class="mt-4 form-control btn btn-large btn-success") }}
 </form>
 </div>
+
 
 {% endblock %}

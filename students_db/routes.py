@@ -2,17 +2,28 @@ from students_db import app
 from students_db import db
 from flask import render_template, request, redirect, url_for, session, flash, Markup
 from students_db.models import Student, User
-from students_db.forms import RegisterForm, AddStudent, LoginForm
+from students_db.forms import RegisterForm, AddStudent, LoginForm, Filter
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import current_user, login_required, login_user
+from sqlalchemy import or_
 
 
-@app.route('/')
-@app.route('/show')
+
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/show', methods=['GET', 'POST'])
 @login_required
 def dashboard():
+    form = Filter()
     students = User.query.all()
-    return render_template('table.html', students=students)
+    if request.method == 'GET':
+        return render_template('table.html', students=students, form=form)
+    search_term = form.search.data
+    if search_term:
+        student = User.query.filter(or_(User.name.contains(search_term), User.department.contains(search_term)))
+        if student:
+            return render_template('table.html', students=student, form=form)
+        return render_template('table.html', students=students, form=form)
+    return render_template('table.html', students=students, form=form)
 
 
 @app.route('/add', methods=['GET', 'POST'])
@@ -140,4 +151,3 @@ def edit(id):
         flash('User data updated!', category='success')
         return redirect(url_for('dashboard'))
     return render_template('profile.html', profile=user_to_update, form=form)
-
