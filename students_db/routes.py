@@ -30,7 +30,7 @@ def add():
         )
         db.session.add(student)
         db.session.commit()
-        flash('Student added to the database!', category='info')
+        flash('Student added to the database!', category='success')
         return redirect(url_for('dashboard'))
 
     if form.errors != {}:
@@ -46,7 +46,7 @@ def delete(id):
     try:
         db.session.delete(student)
         db.session.commit()
-        flash(f'Student {student.name} has been deleted!', category='info')
+        flash(f'Student {student.name} has been deleted!', category='success')
         return redirect(url_for('dashboard'))
     except Exception as e:
         print(e)
@@ -60,10 +60,10 @@ def handle_checkbox():
     if request.method == "POST":
         students = request.form.getlist('checkbox')
         for student in students:
-            del_student = User.query.get(student)
+            del_student = Student.query.get(student)
             db.session.delete(del_student)
             db.session.commit()
-            flash(f"Student {del_student.name} has been deleted!", category="info")
+            flash(f"Student {del_student.name} has been deleted!", category="success")
         return redirect(url_for('dashboard'))
     return redirect(url_for('dashboard'))
 
@@ -75,7 +75,7 @@ def register():
         'User already exists! Would you like to <a href="/login">log in </a> instead?')
     if request.method == 'POST' and form.validate():
         if User.query.filter_by(email=form.email.data).first():
-            flash(message, category='info')
+            flash(message, category='success')
             return redirect(url_for('register'))
         hashed_password = generate_password_hash(
             form.password.data, method='sha256')
@@ -86,7 +86,7 @@ def register():
                         password_hash=hashed_password)
         db.session.add(new_user)
         db.session.commit()
-        flash('User created!', category='info')
+        flash('User created!', category='success')
         login_user(new_user)
         return redirect(url_for('dashboard'))
     if form.errors != {}:
@@ -110,7 +110,7 @@ def login():
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('dashboard')
-            flash('Logged in!', category='info')
+            flash('Logged in!', category='success')
             return redirect(url_for('dashboard'))
 
         flash('Username or password incorrect', category='danger')
@@ -126,12 +126,12 @@ def login():
 @login_required
 def logout():
     session.clear()
-    flash('You\'re logged out!', category='info')
+    flash('You\'re logged out!', category='success')
     return redirect(url_for('login'))
 
 
-@app.route('/profile/<int:id>', methods=["GET", "POST"])
-def profile(id):
+@app.route('/edit/<int:id>', methods=["GET", "POST"])
+def edit(id):
     user_to_update = User.query.get(id)
     form = AddStudent(obj=user_to_update)
     if request.method == 'POST':

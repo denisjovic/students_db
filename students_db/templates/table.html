@@ -2,80 +2,103 @@
 
 {% block content %}
 
-{% if students %}
-<div class="mx-auto" style="width: 69%; margin-top:15vh">
-<table class="table table-dark">
-    <thead class="thead-dark text-white">
-        <tr>
-            <th scope="col">
-                <form action="/checkbox" method="POST" id="checkboxform">
-                    <label for="select_all">
-                        <input id="select_all" type="checkbox" />
-                        <span></span>
-                    </label>
-                    Select all
-            </th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Department</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
+    {% if students %}
+    <div class="mx-auto" style="width: 69%; margin-top:15vh">
+        <table class="table table-dark">
+            <thead class="thead-dark text-white">
+            <tr>
+                {% if current_user.is_admin %}
 
-    <tbody>
-        {% for student in students %}
-        <tr>
-            <td><label><input type="checkbox" value="{{ student.id }}" name="checkbox" /><span></span></label></td>
-            <td>{{ student.name }}</td>
-            <td>{{ student.email }}</td>
-            <td>{{ student.phone }}</td>
-            <td>{{ student.department }}</td>
-            <td><a href="/delete/{{ student.id }}"><span class="material-icons">
+                    <th scope="col">
+                        <form action="/checkbox" method="POST" id="checkboxform">
+                            <label for="select_all">
+                                <input id="select_all" type="checkbox"/>
+                                <span></span>
+                            </label>
+                            Select all
+                    </th>
+                {% endif %}
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Department</th>
+                {% if current_user.is_admin %}
+
+                    <th scope="col">Action</th>
+                {% endif %}
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for student in students %}
+                <tr>
+                {% if current_user.is_admin %}
+
+                <td><label><input type="checkbox" value="{{ student.id }}" name="checkbox"/><span></span></label></td>
+                {% endif %}
+
+                <td>{{ student.name }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.phone }}</td>
+                <td>{{ student.department }}</td>
+                {% if current_user.is_admin %}
+
+                <td><a href="/delete/{{ student.id }}"><span class="material-icons">
                         delete
                     </span></a>
-            </td>
+                </td>
+                {% endif %}
+
             {% endfor %}
-        </tr>
-    </tbody>
-</table>
-<button type="submit" class="button is-danger">
-    <span class="material-icons">delete</span>
-    Delete selected
-</button>
-</form>
-<button class="button is-primary" style="float: right;"><a class="text-white" href="/add">Add new student <span
-            class="material-icons text-white">
+            </tr>
+            </tbody>
+        </table>
+        {% if current_user.is_admin %}
+
+        <button type="submit" class="button is-danger">
+            <span class="material-icons">delete</span>
+            Delete selected
+        </button>
+        {% endif %}
+
+        </form>
+        {% if current_user.is_admin %}
+
+        <button class="button is-primary" style="float: right;"><a class="text-white" href="/add">Add new student <span
+                class="material-icons text-white">
             add_circle_outline
         </span></a></button>
-</div>
+        {% endif %}
 
-{% else %}
-<!-- If students db is empty -->
-<div class="container is-fluid">
-    <div class="notification is-primary">
-        <h2>Student database is empty, do you want to <a href="/add">add</a> some?</h2>
-    </div>
-</div>
+            </div>
+
+        {% else %}
+            <!-- If students db is empty -->
+
+            <div class="container is-fluid">
+                <div class="notification is-primary">
+                    <h2>Student database is empty, do you want to <a href="/add">add</a> some?</h2>
+                </div>
+            </div>
 
 
-{% endif %}
+        {% endif %}
 
 
-<!-- Select all checkboxes for deleting -->
-<script>
-    $('#select_all').click(function (event) {
-        if (this.checked) {
-            $(':checkbox').each(function () {
-                this.checked = true;
-            });
-        } else {
-            $(':checkbox').each(function () {
-                this.checked = false;
-            });
-        }
-    });
+    <!-- Select all checkboxes for deleting -->
+    <script>
+        $('#select_all').click(function (event) {
+            if (this.checked) {
+                $(':checkbox').each(function () {
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
 
-</script>
+    </script>
 
 {% endblock %}
