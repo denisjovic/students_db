@@ -55,6 +55,9 @@ def add():
 def delete(id):
     student = User.query.get(id)
     try:
+        if student.is_admin:
+            flash('Can\'t delete admin!', category='danger')
+            return redirect(url_for('dashboard'))
         db.session.delete(student)
         db.session.commit()
         flash(f'Student {student.name} has been deleted!', category='success')
@@ -72,6 +75,9 @@ def handle_checkbox():
         students = request.form.getlist('checkbox')
         for student in students:
             del_student = Student.query.get(student)
+            if del_student.is_admin:
+                flash('Can\'t delete admin!', category='danger')
+                return redirect(url_for('dashboard'))
             db.session.delete(del_student)
             db.session.commit()
             flash(f"Student {del_student.name} has been deleted!", category="success")

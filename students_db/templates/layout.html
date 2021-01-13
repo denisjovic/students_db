@@ -21,10 +21,9 @@
 </head>
 
 <body class='bg-dark'>
-<nav>
+<nav class="teal lighten-2">
     <div class="nav-wrapper">
         {% if current_user.is_authenticated %}
-
             <ul id="nav-mobile" class="left hide-on-med-and-down pl-2">
                 <li>Welcome, {{ current_user.name.capitalize() }}</li>
             </ul>

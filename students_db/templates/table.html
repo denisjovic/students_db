@@ -27,7 +27,6 @@
                 <th scope="col">Phone</th>
                 <th scope="col">Department</th>
                 {% if current_user.is_admin %}
-
                     <th scope="col">Action</th>
                 {% endif %}
             </tr>
@@ -71,7 +70,7 @@
         </form>
         {% if current_user.is_admin %}
 
-        <button class="button is-primary" style="float: right;"><a class="text-white" href="/add">Add new student <span
+        <button class="button teal lighten-2" style="float: right;"><a class="text-white" href="/add">Add new student <span
                 class="material-icons text-white">
             add_circle_outline
         </span></a></button>

@@ -13,6 +13,7 @@
 
 
 
+
 OK, super, imas sve sto smo rekli i mislim da si relativno brzo uradio. Sad cu ti napisati sta i kako da unapredis i kad to zavrsis to ce biti to za ovaj projekat. Naravno, ako ti imas vremena i zelis da eksperimentises, ti mozes i vise da uradis, ali ja cu ti reci sta da uradis da tvoj mali projekat licni na tipican veci projekat i da radi na slican nacin.
 
 Da unapradis projekat sa trenutnim funkcionalnostima, uradi sledece:
