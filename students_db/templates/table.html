@@ -45,8 +45,8 @@
                 <td>{{ student.phone }}</td>
                 <td>{{ student.department }}</td>
                 {% if current_user.is_admin %}
-
-                <td><a href="/delete/{{ student.id }}"><span class="material-icons">
+                {# TODO: fix confirm delete styling #}
+                <td><a href="/delete/{{ student.id }}" onclick="return confirm('Are you sure?');"><span class="material-icons">
                         delete
                     </span></a>
                 <a href="/edit/{{ student.id }}"><span class="material-icons">

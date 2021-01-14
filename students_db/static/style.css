@@ -3,8 +3,7 @@ body {
 }
 
 nav {
-    padding: 0px 0px 30px 0px;
-    /* margin-bottom: 10vh; */
+    padding: 0 0 30px 0;
 }
 
 
@@ -22,7 +21,6 @@ button > .waves-light {
 .btn-secondary > a {
     color: white !important;
 }
-
 
 
 .container {
